@@ -1,0 +1,152 @@
+[gd_scene load_steps=7 format=3 uid="uid://rwqlj6vkayut"]
+
+[ext_resource type="FontFile" uid="uid://ctcuqlb134stk" path="res://fonts/Xolonium-Regular.ttf" id="1_37p78"]
+[ext_resource type="Script" uid="uid://cusdnd743beug" path="res://hud.gd" id="1_64ctp"]
+[ext_resource type="Texture2D" uid="uid://bnq3eiwh0ox82" path="res://icons/gear.svg" id="3_8sq4i"]
+[ext_resource type="Script" uid="uid://dd6odp7mouunj" path="res://texture_rect.gd" id="4_640wx"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_8sq4i"]
+events = [SubResource("InputEventAction_64ctp")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_64ctp")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 78.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -120.0
+offset_right = 240.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+text = "Dodge the Creeps!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -140.0
+offset_right = 125.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_8sq4i")
+text = "START"
+
+[node name="MessageTimer" type="Timer" parent="."]
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_right = 112.0
+offset_bottom = 40.0
+theme_override_colors/font_hover_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/font_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/icon_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/icon_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/font_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+text = "Settings"
+alignment = 2
+expand_icon = true
+item_count = 5
+popup/item_0/text = "Music volume"
+popup/item_0/id = 0
+popup/item_1/text = "Difficulty"
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "Easy"
+popup/item_2/checkable = 2
+popup/item_2/id = 2
+popup/item_3/text = "Normal"
+popup/item_3/checkable = 2
+popup/item_3/checked = true
+popup/item_3/id = 3
+popup/item_4/text = "Hard"
+popup/item_4/checkable = 2
+popup/item_4/id = 4
+
+[node name="TextureRect" type="TextureRect" parent="MenuButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("3_8sq4i")
+expand_mode = 1
+script = ExtResource("4_640wx")
+
+[node name="VolumePopup" type="Popup" parent="."]
+title = "Volume settings"
+initial_position = 2
+size = Vector2i(360, 180)
+visible = true
+
+[node name="Label" type="Label" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.144
+anchor_top = 0.1
+anchor_right = 0.866
+anchor_bottom = 0.215
+offset_left = 88.16
+offset_right = -112.76
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.26
+anchor_right = 0.866
+anchor_bottom = 0.34
+offset_left = 0.119999
+offset_right = 0.159973
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+scrollable = false
+
+[node name="ConfirmVolumeButton" type="Button" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.5
+anchor_right = 0.847
+anchor_bottom = 0.678
+offset_left = 68.12
+offset_right = -67.92
+offset_bottom = -1.04002
+text = "Save and close"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="mouse_entered" from="MenuButton" to="MenuButton/TextureRect" method="_on_menu_button_mouse_entered"]
+[connection signal="mouse_exited" from="MenuButton" to="MenuButton/TextureRect" method="_on_menu_button_mouse_exited"]
+[connection signal="pressed" from="VolumePopup/ConfirmVolumeButton" to="." method="_on_confirm_volume_button_pressed"]
