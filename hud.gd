@@ -62,3 +62,10 @@ func _on_confirm_volume_button_pressed() -> void:
 	$VolumePopup.hide()
 	var volume_value = $VolumePopup.get_node("VolumeSlider").value / 100.0
 	volume_changed.emit(volume_value)
+	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action("exit_fullscreen"):
+		if settings_menu.is_item_checked(5):	# id and index match so far
+			print("Exit fullscreen")
+			settings_menu.id_pressed.emit(5)

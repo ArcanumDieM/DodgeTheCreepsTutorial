@@ -27,9 +27,8 @@ func _init(
 	
 func manage_settings(id: int):
 	#print("ID: ", id)
-	if id == 0:
-		pass
-	else:
+	var index = settings_menu.get_item_index(id)
+	if id > 1 and id < 5:
 		settings_menu.set_item_checked(settings_menu.get_item_index(2), false)
 		settings_menu.set_item_checked(settings_menu.get_item_index(3), false)
 		settings_menu.set_item_checked(settings_menu.get_item_index(4), false)
@@ -37,5 +36,12 @@ func manage_settings(id: int):
 			2: difficulty = GameDifficulty.EASY
 			3: difficulty = GameDifficulty.NORMAL
 			4: difficulty = GameDifficulty.HARD
-		settings_menu.set_item_checked(settings_menu.get_item_index(id), true)
+		settings_menu.set_item_checked(index, true)
 		self.difficulty_callback.call(difficulty)
+	elif id == 5:
+		var is_previously_checked = settings_menu.is_item_checked(index)
+		settings_menu.set_item_checked(index, not is_previously_checked)
+		if settings_menu.is_item_checked(index):
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
