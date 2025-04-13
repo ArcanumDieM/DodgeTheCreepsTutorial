@@ -15,6 +15,8 @@ func _ready() -> void:
 	
 	settings_container.difficulty_changed.connect(_on_difficulty_changed)
 	settings_container.volume_changed.connect(_on_hud_volume_changed)
+	
+	settings_container.load_configuration()
 
 
 func game_over() -> void:

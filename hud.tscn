@@ -69,8 +69,10 @@ text = "START"
 [node name="MessageTimer" type="Timer" parent="."]
 
 [node name="MenuButton" type="MenuButton" parent="."]
-offset_right = 112.0
-offset_bottom = 40.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 48.0
 theme_override_colors/font_hover_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
 theme_override_colors/font_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
 theme_override_colors/icon_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
@@ -98,6 +100,7 @@ popup/item_4/id = 4
 popup/item_5/text = "Fullscreen"
 popup/item_5/checkable = 1
 popup/item_5/id = 5
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="MenuButton"]
 layout_mode = 0
