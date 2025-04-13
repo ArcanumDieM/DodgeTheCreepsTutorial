@@ -10,28 +10,13 @@ var score_increment
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect to settings menu
-	settings_container = Settings.new($HUD.get_settings_menu(), change_difficulty)
+	settings_container = Settings.new($HUD)
 	score_increment = 10
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	settings_container.difficulty_changed.connect(_on_difficulty_changed)
+	settings_container.volume_changed.connect(_on_hud_volume_changed)
 
 
-func change_difficulty(difficulty: Settings.GameDifficulty):
-	match difficulty:
-		Settings.GameDifficulty.EASY: 
-			$MobTimer.wait_time = 1.0
-			score_increment = 5
-		Settings.GameDifficulty.NORMAL: 
-			$MobTimer.wait_time = 0.5
-			score_increment = 10
-		Settings.GameDifficulty.HARD: 
-			$MobTimer.wait_time = 0.3
-			score_increment = 20
-		
-	
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
@@ -59,7 +44,7 @@ func new_game():
 
 
 func _on_mob_timer_timeout() -> void:
-	print(Time.get_ticks_msec())
+	#print(Time.get_ticks_msec())
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
@@ -93,6 +78,20 @@ func _on_start_timer_timeout() -> void:
 	# Start other timers
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+
+func _on_difficulty_changed(difficulty: Settings.GameDifficulty):
+	print("Difficulty set to ", difficulty)
+	match difficulty:
+		Settings.GameDifficulty.EASY: 
+			$MobTimer.wait_time = 1.0
+			score_increment = 5
+		Settings.GameDifficulty.NORMAL: 
+			$MobTimer.wait_time = 0.5
+			score_increment = 10
+		Settings.GameDifficulty.HARD: 
+			$MobTimer.wait_time = 0.3
+			score_increment = 20
 
 
 func _on_hud_volume_changed(new_value: float) -> void:

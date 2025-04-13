@@ -2,7 +2,6 @@ extends CanvasLayer
 
 # Notifies `Main` node that the button has been pressed
 signal start_game
-signal volume_changed(new_value: float)
 
 var settings_menu: PopupMenu
 
@@ -10,20 +9,6 @@ var settings_menu: PopupMenu
 func _ready() -> void:
 	settings_menu = $MenuButton.get_popup()
 	settings_menu.set_hide_on_checkable_item_selection(false)
-	settings_menu.id_pressed.connect(show_volume_settings)
-
-
-func get_settings_menu() -> PopupMenu:
-	return settings_menu
-
-func show_volume_settings(id: int):
-	if id == 0:
-		$VolumePopup.show()
-		
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func show_message(text, start_timer: bool = true):
@@ -31,8 +16,8 @@ func show_message(text, start_timer: bool = true):
 	$Message.show()
 	if start_timer:
 		$MessageTimer.start()
-	
-	
+
+
 func show_game_over():
 	show_message("Game Over")
 	# Wait until the MessageTimer has counted down.
@@ -57,12 +42,6 @@ func _on_start_button_pressed() -> void:
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
 
-
-func _on_confirm_volume_button_pressed() -> void:
-	$VolumePopup.hide()
-	var volume_value = $VolumePopup.get_node("VolumeSlider").value / 100.0
-	volume_changed.emit(volume_value)
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("exit_fullscreen"):
