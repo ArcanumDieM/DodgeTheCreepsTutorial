@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwqlj6vkayut"]
+[gd_scene load_steps=13 format=3 uid="uid://rwqlj6vkayut"]
 
 [ext_resource type="FontFile" uid="uid://ctcuqlb134stk" path="res://fonts/Xolonium-Regular.ttf" id="1_37p78"]
 [ext_resource type="Script" uid="uid://cusdnd743beug" path="res://hud.gd" id="1_64ctp"]
@@ -10,6 +10,30 @@ action = &"start_game"
 
 [sub_resource type="Shortcut" id="Shortcut_8sq4i"]
 events = [SubResource("InputEventAction_64ctp")]
+
+[sub_resource type="Gradient" id="Gradient_640wx"]
+colors = PackedColorArray(0.223103, 0.223103, 0.223103, 1, 0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2258"]
+gradient = SubResource("Gradient_640wx")
+
+[sub_resource type="Gradient" id="Gradient_a2258"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.669091, 0.723636)
+colors = PackedColorArray(0, 0, 0, 0, 0.658824, 0.686275, 0.74902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1xsix"]
+gradient = SubResource("Gradient_a2258")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_1xsix"]
+offsets = PackedFloat32Array(0.0618182, 0.941818)
+colors = PackedColorArray(4.62055e-06, 0.563816, 2.88785e-06, 1, 0.557899, 0.744839, 0.4389, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rftc2"]
+gradient = SubResource("Gradient_1xsix")
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_64ctp")
@@ -150,6 +174,24 @@ offset_left = 68.12
 offset_right = -67.92
 offset_bottom = -1.04002
 text = "Save and close"
+
+[node name="LifeBar" type="TextureProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 48.0
+grow_horizontal = 0
+max_value = 10.0
+value = 10.0
+nine_patch_stretch = true
+stretch_margin_left = 30
+stretch_margin_right = 30
+texture_under = SubResource("GradientTexture1D_a2258")
+texture_over = SubResource("GradientTexture2D_1xsix")
+texture_progress = SubResource("GradientTexture1D_rftc2")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

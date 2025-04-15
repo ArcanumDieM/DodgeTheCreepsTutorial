@@ -1,10 +1,13 @@
 extends Area2D
 
 signal hit
+signal dead
 
 @export var speed: float = 400.0 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
+@export var lifesize = 10.0
+@onready var life: float = lifesize
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,17 +21,8 @@ func _process(delta: float) -> void:
 	
 	velocity.x += Input.get_axis("move_left", "move_right")
 	velocity.y += Input.get_axis("move_up", "move_down")
-	#if Input.is_action_pressed("move_right"):
-		#velocity.x += 1
-	#if Input.is_action_pressed("move_left"):
-		#velocity.x -= 1
-	#if Input.is_action_pressed("move_down"):
-		#velocity.y += 1
-	#if Input.is_action_pressed("move_up"):
-		#velocity.y -= 1
 
 	if velocity.length() > 0:
-		#velocity = velocity.normalized() * speed
 		var angle = velocity.angle()
 		velocity.x *= abs(cos(angle))
 		velocity.y *= abs(sin(angle))
@@ -57,7 +51,19 @@ func start(pos):
 
 
 func _on_body_entered(body: Node2D) -> void:
+	print("hit")
 	hide() # Player disappears after being hit.
+	life -= 1
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CollisionShape2D.set_deferred("disabled", true)
+	if life <= 0:
+		dead.emit()
+	else:
+		$InvincibleTimer.start()
+
+
+func _on_invincible_timer_timeout() -> void:
+	$InvincibleTimer.stop()
+	$CollisionShape2D.disabled = false
+	show()

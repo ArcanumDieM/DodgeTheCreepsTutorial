@@ -7,6 +7,9 @@ var settings_container: Settings
 var score
 var score_increment
 
+var background_color = Color("a8afbf")
+var hit_color = Color("#e6806a")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect to settings menu
@@ -18,6 +21,13 @@ func _ready() -> void:
 	
 	settings_container.load_configuration()
 
+
+func _on_player_hit() -> void:
+	$ColorRect.color = hit_color
+	$ColorRect/ColorTimer.start()
+	score -= score_increment
+	$HUD.update_score(score)
+	$HUD.update_lifebar($Player.life)
 
 func game_over() -> void:
 	$ScoreTimer.stop()
@@ -102,3 +112,8 @@ func _on_hud_volume_changed(new_value: float) -> void:
 	#print($Music.volume_db, " -> ", db_to_linear($Music.volume_db))
 	$Music.volume_linear = new_value
 	$DeathSound.volume_linear = new_value
+
+
+func _on_color_timer_timeout() -> void:
+	$ColorRect/ColorTimer.stop()
+	$ColorRect.color = background_color

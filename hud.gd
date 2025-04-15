@@ -37,6 +37,10 @@ func update_score(score):
 	$ScoreLabel.text = str(score)
 
 
+func update_lifebar(current_value: float):
+	$LifeBar.value = current_value
+
+
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
 	start_game.emit()
@@ -46,7 +50,7 @@ func _on_start_button_pressed() -> void:
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
 	$MessageTimer.stop()
-
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("exit_fullscreen"):

@@ -34,6 +34,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.659201, 0.686703, 0.750641, 1)
 
+[node name="ColorTimer" type="Timer" parent="ColorRect"]
+wait_time = 0.4
+
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="MobTimer" type="Timer" parent="."]
@@ -62,7 +65,9 @@ stream = SubResource("AudioStreamOggVorbis_lquwl")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_272bh")
 
-[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="ColorRect/ColorTimer" to="." method="_on_color_timer_timeout"]
+[connection signal="dead" from="Player" to="." method="game_over"]
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
