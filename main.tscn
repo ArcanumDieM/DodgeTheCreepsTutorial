@@ -22,6 +22,7 @@ packet_sequence = SubResource("OggPacketSequence_1utue")
 loop = true
 
 [node name="Main" type="Node"]
+process_mode = 1
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_h2yge")
 
@@ -53,6 +54,7 @@ curve = SubResource("Curve2D_ig7tw")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
+process_mode = 3
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamOggVorbis_lquwl")

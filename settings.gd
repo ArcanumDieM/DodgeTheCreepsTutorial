@@ -24,7 +24,7 @@ func _init(settings_hud: Node) -> void:
 	self.settings_menu = self.settings_hud.settings_menu
 	self.volume_popup = self.settings_hud.get_node("VolumePopup")
 	
-	self.settings_menu.id_pressed.connect(manage_settings)
+	self.settings_menu.id_pressed.connect(check_settings)
 	self.volume_popup.get_node("ConfirmVolumeButton").pressed.connect(_on_confirm_volume_button_pressed)
 
 
@@ -51,7 +51,7 @@ func load_configuration():
 	
 	volume_popup.get_node("VolumeSlider").value = self.music_volume * 100.0
 	volume_changed.emit(self.music_volume)
-	manage_settings(self.difficulty + 2)
+	manage_settings(self.difficulty + 2, false)
 
 func save_configuration():
 	self.config.set_value("music", "volume", self.music_volume)
@@ -63,7 +63,10 @@ func save_configuration():
 	self.config.save("user://settings.cfg")
 
 
-func manage_settings(id: int):
+func check_settings(id: int):
+	manage_settings(id, true)
+	
+func manage_settings(id: int, save_changes: bool):
 	#print("ID: ", id)
 	var index = settings_menu.get_item_index(id)
 	if id == 0:
