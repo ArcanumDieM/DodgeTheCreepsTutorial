@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://rwqlj6vkayut"]
+[gd_scene load_steps=14 format=3 uid="uid://rwqlj6vkayut"]
 
 [ext_resource type="FontFile" uid="uid://ctcuqlb134stk" path="res://fonts/Xolonium-Regular.ttf" id="1_37p78"]
 [ext_resource type="Script" uid="uid://cusdnd743beug" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="Texture2D" uid="uid://bnq3eiwh0ox82" path="res://icons/gear.svg" id="3_8sq4i"]
 [ext_resource type="Script" uid="uid://dd6odp7mouunj" path="res://texture_rect.gd" id="4_640wx"]
+[ext_resource type="PackedScene" uid="uid://ptxhub4pgrw2" path="res://fps_counter.tscn" id="5_a2258"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
 action = &"start_game"
@@ -105,7 +106,7 @@ theme_override_colors/font_pressed_color = Color(0.310617, 0.310617, 0.310617, 1
 text = "Settings"
 alignment = 2
 expand_icon = true
-item_count = 6
+item_count = 7
 popup/item_0/text = "Music volume"
 popup/item_0/id = 0
 popup/item_1/text = "Difficulty"
@@ -124,6 +125,9 @@ popup/item_4/id = 4
 popup/item_5/text = "Fullscreen"
 popup/item_5/checkable = 1
 popup/item_5/id = 5
+popup/item_6/text = "60 FPS"
+popup/item_6/checkable = 1
+popup/item_6/id = 6
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="MenuButton"]
@@ -203,6 +207,15 @@ stretch_margin_right = 30
 texture_under = SubResource("GradientTexture1D_a2258")
 texture_over = SubResource("GradientTexture2D_1xsix")
 texture_progress = SubResource("GradientTexture1D_rftc2")
+
+[node name="FPSCounter" parent="." instance=ExtResource("5_a2258")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 45.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
