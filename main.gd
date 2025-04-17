@@ -49,6 +49,7 @@ func new_game():
 	$StartTimer.start()
 	# Update HUD
 	$HUD.update_score(score)
+	$HUD.update_lifebar($Player.life)
 	$HUD.show_message("Get Ready")
 	$HUD.get_node("MenuButton").hide()
 	# Start the music

@@ -46,6 +46,7 @@ func _process(delta: float) -> void:
 
 func start(pos):
 	position = pos
+	life = lifesize
 	show()
 	$CollisionShape2D.disabled = false
 
