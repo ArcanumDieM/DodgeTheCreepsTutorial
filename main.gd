@@ -20,6 +20,7 @@ func _ready() -> void:
 	settings_container.volume_changed.connect(_on_hud_volume_changed)
 	
 	settings_container.load_configuration()
+	settings_container.open_level_selector.connect(open_level_selector_window)
 
 
 func _on_player_hit() -> void:
@@ -28,6 +29,7 @@ func _on_player_hit() -> void:
 	score -= score_increment
 	$HUD.update_score(score)
 	$HUD.update_lifebar($Player.life)
+
 
 func game_over() -> void:
 	$ScoreTimer.stop()
@@ -118,3 +120,7 @@ func _on_hud_volume_changed(new_value: float) -> void:
 func _on_color_timer_timeout() -> void:
 	$ColorRect/ColorTimer.stop()
 	$ColorRect.color = background_color
+
+
+func open_level_selector_window():
+	$MenuLayer/LevelMenu.open_menu()

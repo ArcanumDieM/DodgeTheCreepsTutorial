@@ -6,6 +6,7 @@ enum GameDifficulty {
 
 signal difficulty_changed(new_value: GameDifficulty)
 signal volume_changed(new_value: float)
+signal open_level_selector
 
 # Menu object
 var settings_hud: Node
@@ -75,6 +76,8 @@ func manage_settings(id: int):
 	var index = settings_menu.get_item_index(id)
 	if id == 0:
 		volume_popup.show()
+	elif id == 7:
+		open_level_selector.emit()
 	elif id > 1 and id < 5:
 		#region Difficulty settings
 		manage_difficulty_setting(id, index)

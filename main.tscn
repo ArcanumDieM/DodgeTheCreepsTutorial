@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://ddbpw046cujqs"]
+[gd_scene load_steps=10 format=4 uid="uid://ddbpw046cujqs"]
 
 [ext_resource type="Script" uid="uid://7f2so77662ml" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c0qixxmevx8go" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dfjet1wtw5q87" path="res://mob.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://rwqlj6vkayut" path="res://hud.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://djspvjtetbpqb" path="res://level_menu.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dfrc774yjmyrm" path="res://art/gameover.wav" id="6_272bh"]
 
 [sub_resource type="Curve2D" id="Curve2D_ig7tw"]
@@ -37,7 +38,8 @@ color = Color(0.659201, 0.686703, 0.750641, 1)
 [node name="ColorTimer" type="Timer" parent="ColorRect"]
 wait_time = 0.4
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Player" parent="." node_paths=PackedStringArray("world_map") instance=ExtResource("1_ig7tw")]
+world_map = NodePath("../ColorRect")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -55,6 +57,11 @@ position = Vector2(240, 450)
 curve = SubResource("Curve2D_ig7tw")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="LevelMenu" parent="MenuLayer" instance=ExtResource("6_7mycd")]
 
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
 process_mode = 3

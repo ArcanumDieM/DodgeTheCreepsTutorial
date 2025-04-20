@@ -9,6 +9,10 @@ var screen_size # Size of the game window.
 @export var lifesize = 10.0
 @onready var life: float = lifesize
 
+# Variable for PlayerCamera
+@export var world_map: ColorRect
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
