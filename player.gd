@@ -36,7 +36,8 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.stop()
 	
 	self.position += velocity * delta
-	self.position = self.position.clamp(Vector2.ZERO, screen_size)
+	if not debug.outbound_move:
+		self.position = self.position.clamp(Vector2.ZERO, world_map.size)
 
 	# Change animation
 	if velocity.x != 0:

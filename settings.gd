@@ -1,3 +1,4 @@
+class_name Settings
 extends Node
 
 enum GameDifficulty {
