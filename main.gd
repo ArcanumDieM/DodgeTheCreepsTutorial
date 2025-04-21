@@ -97,6 +97,7 @@ func _on_mob_timer_timeout() -> void:
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 	mob.spawned = true
+	mob.spawn_time = Time.get_ticks_msec()
 #endregion
 
 #region Obstacle spawning

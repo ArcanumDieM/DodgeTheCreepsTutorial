@@ -89,6 +89,8 @@ stream = ExtResource("6_272bh")
 script = ExtResource("7_272bh")
 
 [node name="Area2D" type="Area2D" parent="WorldOutbound"]
+collision_layer = 16
+collision_mask = 15
 
 [node name="LeftWall" type="CollisionShape2D" parent="WorldOutbound/Area2D"]
 position = Vector2(-100, 400)
