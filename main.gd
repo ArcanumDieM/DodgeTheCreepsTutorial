@@ -71,7 +71,7 @@ func new_game():
 func _on_mob_timer_timeout() -> void:
 	#print(Time.get_ticks_msec())
 	# Create a new instance of the Mob scene.
-	var mob = mob_scene.instantiate()
+	var mob: MobScene = mob_scene.instantiate()
 
 	# Choose a random location on Path2D.
 	var mob_spawn_location = $MobPath/MobSpawnLocation
@@ -87,10 +87,16 @@ func _on_mob_timer_timeout() -> void:
 	
 	# Choose the velocity for the mob.
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-
+	mob.velocity = velocity.rotated(direction)
+	mob.initial_velocity = mob.velocity
+	mob.initial_direction = direction
+	print("Spawnd mob {mob} with direction {dir} and velocity {vel}".format(
+		{"mob": mob, "dir": rad_to_deg(direction), "vel": mob.initial_velocity}
+	))
+	
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+	mob.spawned = true
 #endregion
 
 #region Obstacle spawning

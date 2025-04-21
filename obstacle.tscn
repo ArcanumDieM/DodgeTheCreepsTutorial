@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6wuodwnxm101"]
 
 [ext_resource type="Shader" uid="uid://bfx0xuwpjxryc" path="res://obstacle.gdshader" id="1_sl1jc"]
-[ext_resource type="Texture2D" uid="uid://bgsqgkf34cotc" path="res://art/simple_circle.png" id="2_aubd6"]
+[ext_resource type="Texture2D" uid="uid://tejr266xssi4" path="res://art/simple_circle.svg" id="2_aubd6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aubd6"]
 shader = ExtResource("1_sl1jc")
@@ -17,7 +17,9 @@ collision_mask = 6
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
 position = Vector2(-9.53674e-07, -9.53674e-07)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_aubd6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_vcivv")
