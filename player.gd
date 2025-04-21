@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 signal hit
 signal dead
@@ -21,21 +21,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO # The player's movement vector.
+	var vel = Vector2.ZERO # The player's movement vector.
 	
-	velocity.x += Input.get_axis("move_left", "move_right")
-	velocity.y += Input.get_axis("move_up", "move_down")
+	vel.x += Input.get_axis("move_left", "move_right")
+	vel.y += Input.get_axis("move_up", "move_down")
 
-	if velocity.length() > 0:
-		var angle = velocity.angle()
-		velocity.x *= abs(cos(angle))
-		velocity.y *= abs(sin(angle))
-		velocity *= speed
+	if vel.length() > 0:
+		var angle = vel.angle()
+		vel.x *= abs(cos(angle))
+		vel.y *= abs(sin(angle))
+		vel *= speed
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
 	
-	self.position += velocity * delta
+	#self.position += velocity * delta
+	self.velocity = vel
+	self.move_and_slide()
 	if not debug.outbound_move:
 		self.position = self.position.clamp(Vector2.ZERO, world_map.size)
 
