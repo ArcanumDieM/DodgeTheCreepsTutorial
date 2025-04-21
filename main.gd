@@ -90,9 +90,9 @@ func _on_mob_timer_timeout() -> void:
 	mob.velocity = velocity.rotated(direction)
 	mob.initial_velocity = mob.velocity
 	mob.initial_direction = direction
-	print("Spawnd mob {mob} with direction {dir} and velocity {vel}".format(
-		{"mob": mob, "dir": rad_to_deg(direction), "vel": mob.initial_velocity}
-	))
+	#print("Spawnd mob {mob} with direction {dir} and velocity {vel}".format(
+		#{"mob": mob, "dir": rad_to_deg(direction), "vel": mob.initial_velocity}
+	#))
 	
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
