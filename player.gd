@@ -57,16 +57,17 @@ func start(pos):
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("hit")
-	hide() # Player disappears after being hit.
-	life -= 1
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
-	if life <= 0:
-		dead.emit()
-	else:
-		$InvincibleTimer.start()
+	if body.is_in_group("mobs"):
+		print("hit")
+		hide() # Player disappears after being hit.
+		life -= 1
+		hit.emit()
+		# Must be deferred as we can't change physics properties on a physics callback.
+		$CollisionShape2D.set_deferred("disabled", true)
+		if life <= 0:
+			dead.emit()
+		else:
+			$InvincibleTimer.start()
 
 
 func _on_invincible_timer_timeout() -> void:

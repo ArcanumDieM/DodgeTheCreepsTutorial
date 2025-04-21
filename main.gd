@@ -4,6 +4,8 @@ const Settings = preload("res://settings.gd")
 var settings_container: Settings
 
 @export var mob_scene: PackedScene
+@export var obstacle_scene: PackedScene
+
 var score
 var score_increment
 
@@ -49,8 +51,10 @@ func game_over() -> void:
 func new_game():
 	# Clear enemies from the previous games
 	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("obstacles", "queue_free")
 	
 	# Setup the new game
+	obstacle_spawning()
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
@@ -62,7 +66,8 @@ func new_game():
 	# Start the music
 	$Music.play()
 
-# Mob spawning
+
+#region Mob spawning
 func _on_mob_timer_timeout() -> void:
 	#print(Time.get_ticks_msec())
 	# Create a new instance of the Mob scene.
@@ -86,6 +91,26 @@ func _on_mob_timer_timeout() -> void:
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+#endregion
+
+#region Obstacle spawning
+func obstacle_spawning():
+	# Select a random amount of obstacles
+	var amount = randi_range(3, 8)
+	
+	for i in amount:
+		# Create a new instance of the Obstacle scene.
+		var obstacle = obstacle_scene.instantiate()
+		# Choose a random position on the field
+		var x_pos = randf_range(0.0, current_level.size.x)
+		var y_pos = randf_range(0.0, current_level.size.y)
+		
+		obstacle.position.x = x_pos
+		obstacle.position.y = y_pos
+		
+		# Spawn the mob by adding it to the Main scene.
+		add_child(obstacle)
+#endregion
 	
 
 func _on_score_timer_timeout() -> void:

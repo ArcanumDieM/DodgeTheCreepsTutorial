@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://ddbpw046cujqs"]
+[gd_scene load_steps=14 format=4 uid="uid://ddbpw046cujqs"]
 
 [ext_resource type="Script" uid="uid://7f2so77662ml" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c0qixxmevx8go" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dfjet1wtw5q87" path="res://mob.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://c6wuodwnxm101" path="res://obstacle.tscn" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://rwqlj6vkayut" path="res://hud.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://djspvjtetbpqb" path="res://level_menu.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dfrc774yjmyrm" path="res://art/gameover.wav" id="6_272bh"]
@@ -33,6 +34,7 @@ size = Vector2(2000, 50)
 process_mode = 1
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_h2yge")
+obstacle_scene = ExtResource("3_5vw27")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
