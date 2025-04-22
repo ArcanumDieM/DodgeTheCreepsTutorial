@@ -28,6 +28,8 @@ func _ready() -> void:
 	
 	settings_container.load_configuration()
 	settings_container.open_level_selector.connect(open_level_selector_window)
+	
+	$HUD/LightPanel/LightButton.light_change.connect(on_light_change)
 
 
 func _on_player_hit() -> void:
@@ -191,6 +193,17 @@ func _on_level_menu_level_selected(level_id: int) -> void:
 	$WorldOutbound/Area2D/SouthWall.position.y = current_level.size.y + 100
 	$WorldOutbound/Area2D/RightWall.position.x = current_level.size.x + 100
 	$Player/PlayerCamera.update_limits()
+
+
+func on_light_change(light_on: bool):
+	if light_on:
+		# Hide shadow layer
+		$CanvasModulate.hide()
+		$Player/PointLight2D.energy = 0.0
+	else:
+		# Show shadow layer
+		$CanvasModulate.show()
+		$Player/PointLight2D.energy = 3.0
 
 
 class GameLevel:

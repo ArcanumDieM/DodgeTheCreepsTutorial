@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6wuodwnxm101"]
+[gd_scene load_steps=6 format=3 uid="uid://c6wuodwnxm101"]
 
 [ext_resource type="Shader" uid="uid://bfx0xuwpjxryc" path="res://obstacle.gdshader" id="1_sl1jc"]
 [ext_resource type="Texture2D" uid="uid://tejr266xssi4" path="res://art/simple_circle.svg" id="2_aubd6"]
@@ -9,6 +9,9 @@ shader_parameter/blue = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vcivv"]
 radius = 16.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aubd6"]
+polygon = PackedVector2Array(0, -17, 13, -10, 16, 0, 12, 11, 0, 17, -12, 12, -17, 0, -12, -12)
 
 [node name="Obstacle" type="StaticBody2D" groups=["obstacles"]]
 material = SubResource("ShaderMaterial_aubd6")
@@ -23,3 +26,6 @@ texture = ExtResource("2_aubd6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_vcivv")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_aubd6")

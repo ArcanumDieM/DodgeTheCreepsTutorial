@@ -36,6 +36,10 @@ script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_h2yge")
 obstacle_scene = ExtResource("3_5vw27")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.393275, 0.348833, 0.329499, 1)
+
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
