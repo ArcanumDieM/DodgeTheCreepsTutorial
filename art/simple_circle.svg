@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="simple_circle.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="4.1585017"
+     inkscape:cx="126.72834"
+     inkscape:cy="-24.888772"
+     inkscape:window-width="3440"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter12"
+       x="-0.28349682"
+       y="-0.28349682"
+       width="1.5669936"
+       height="1.5669936">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.3903825"
+         id="feGaussianBlur12" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#8c8c8c;fill-opacity:1;stroke:#2c2c2c;stroke-width:3.6561;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path1"
+       cx="32"
+       cy="32"
+       rx="30.171951"
+       ry="30.171949" />
+    <circle
+       style="mix-blend-mode:normal;fill:#a6a6a6;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;filter:url(#filter12)"
+       id="path11"
+       cx="9.1301413"
+       cy="8.8120174"
+       r="5.885283"
+       transform="matrix(2.4422065,0,0,2.2326128,16.219038,21.462788)" />
+  </g>
+</svg>

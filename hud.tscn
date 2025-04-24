@@ -1,0 +1,337 @@
+[gd_scene load_steps=22 format=3 uid="uid://rwqlj6vkayut"]
+
+[ext_resource type="FontFile" uid="uid://ctcuqlb134stk" path="res://fonts/Xolonium-Regular.ttf" id="1_37p78"]
+[ext_resource type="Script" uid="uid://cusdnd743beug" path="res://hud.gd" id="1_64ctp"]
+[ext_resource type="Texture2D" uid="uid://bnq3eiwh0ox82" path="res://icons/gear.svg" id="3_8sq4i"]
+[ext_resource type="Script" uid="uid://dd6odp7mouunj" path="res://texture_rect.gd" id="4_640wx"]
+[ext_resource type="PackedScene" uid="uid://ptxhub4pgrw2" path="res://fps_counter.tscn" id="5_a2258"]
+[ext_resource type="Script" uid="uid://cwcfe0px0fri3" path="res://light_button.gd" id="6_g10ll"]
+[ext_resource type="Texture2D" uid="uid://dw5kokygh447o" path="res://icons/moon.png" id="6_rftc2"]
+[ext_resource type="Texture2D" uid="uid://blsxkui8w5tnh" path="res://icons/sun.png" id="7_61f8s"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_8sq4i"]
+events = [SubResource("InputEventAction_64ctp")]
+
+[sub_resource type="Gradient" id="Gradient_640wx"]
+colors = PackedColorArray(0.223103, 0.223103, 0.223103, 1, 0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2258"]
+gradient = SubResource("Gradient_640wx")
+
+[sub_resource type="Gradient" id="Gradient_a2258"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.669091, 0.723636)
+colors = PackedColorArray(0, 0, 0, 0, 0.658824, 0.686275, 0.74902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1xsix"]
+gradient = SubResource("Gradient_a2258")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_1xsix"]
+offsets = PackedFloat32Array(0.0618182, 0.941818)
+colors = PackedColorArray(4.62055e-06, 0.563816, 2.88785e-06, 1, 0.557899, 0.744839, 0.4389, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rftc2"]
+gradient = SubResource("Gradient_1xsix")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61f8s"]
+bg_color = Color(0.243735, 0.2614, 0.246551, 0.772549)
+border_width_left = 1
+border_width_top = 1
+border_color = Color(0.8, 0.8, 0.8, 0.8)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rftc2"]
+
+[sub_resource type="Shader" id="Shader_3bh6r"]
+code = "shader_type canvas_item;
+
+uniform float transparency = 0.4;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	COLOR = texture(TEXTURE, UV);
+	COLOR *= vec4(1,1,1, transparency);
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61f8s"]
+shader = SubResource("Shader_3bh6r")
+shader_parameter/transparency = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g10ll"]
+shader = SubResource("Shader_3bh6r")
+shader_parameter/transparency = 1.0
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_64ctp")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 78.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -120.0
+offset_right = 240.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+text = "Dodge the Creeps!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -140.0
+offset_right = 125.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_8sq4i")
+text = "START"
+
+[node name="MessageTimer" type="Timer" parent="."]
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 48.0
+theme_override_colors/font_hover_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/font_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/icon_hover_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/icon_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+theme_override_colors/font_pressed_color = Color(0.310617, 0.310617, 0.310617, 1)
+text = "Settings"
+alignment = 2
+expand_icon = true
+item_count = 8
+popup/item_0/text = "Music volume"
+popup/item_0/id = 0
+popup/item_1/text = "Difficulty"
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "Easy"
+popup/item_2/checkable = 2
+popup/item_2/id = 2
+popup/item_3/text = "Normal"
+popup/item_3/checkable = 2
+popup/item_3/checked = true
+popup/item_3/id = 3
+popup/item_4/text = "Hard"
+popup/item_4/checkable = 2
+popup/item_4/id = 4
+popup/item_5/text = "Fullscreen"
+popup/item_5/checkable = 1
+popup/item_5/id = 5
+popup/item_6/text = "60 FPS"
+popup/item_6/checkable = 1
+popup/item_6/id = 6
+popup/item_7/text = "Select level"
+popup/item_7/id = 7
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="MenuButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("3_8sq4i")
+expand_mode = 1
+script = ExtResource("4_640wx")
+
+[node name="VolumePopup" type="Popup" parent="."]
+title = "Volume settings"
+initial_position = 2
+size = Vector2i(360, 180)
+visible = true
+
+[node name="Label" type="Label" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.144
+anchor_top = 0.1
+anchor_right = 0.866
+anchor_bottom = 0.215
+offset_left = 88.16
+offset_right = -112.76
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.26
+anchor_right = 0.866
+anchor_bottom = 0.34
+offset_left = 0.119999
+offset_right = 0.159973
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+scrollable = false
+
+[node name="ConfirmVolumeButton" type="Button" parent="VolumePopup"]
+anchors_preset = -1
+anchor_left = 0.133
+anchor_top = 0.5
+anchor_right = 0.847
+anchor_bottom = 0.678
+offset_left = 68.12
+offset_right = -67.92
+offset_bottom = -1.04002
+text = "Save and close"
+
+[node name="LifeBarBorder" type="ColorRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 52.0
+grow_horizontal = 0
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="LifeBar" type="TextureProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 48.0
+grow_horizontal = 0
+max_value = 10.0
+value = 10.0
+nine_patch_stretch = true
+stretch_margin_left = 30
+stretch_margin_right = 30
+texture_under = SubResource("GradientTexture1D_a2258")
+texture_over = SubResource("GradientTexture2D_1xsix")
+texture_progress = SubResource("GradientTexture1D_rftc2")
+
+[node name="FPSCounter" parent="." instance=ExtResource("5_a2258")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 45.0
+offset_bottom = 0.0
+grow_vertical = 0
+
+[node name="LightPanel" type="Panel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -192.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_61f8s")
+
+[node name="LightButton" type="CheckButton" parent="LightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.633
+anchor_top = 0.897435
+anchor_right = 0.8
+anchor_bottom = 1.05243
+offset_left = 13.36
+offset_top = -117.128
+offset_right = 44.0
+offset_bottom = -121.648
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(2, 2)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rftc2")
+script = ExtResource("6_g10ll")
+metadata/_edit_use_anchors_ = true
+
+[node name="SunIcon" type="TextureRect" parent="LightPanel"]
+material = SubResource("ShaderMaterial_61f8s")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.0864783
+anchor_right = 0.7
+anchor_bottom = 0.260478
+offset_top = 0.0879998
+offset_bottom = 0.0719986
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_61f8s")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MoonIcon" type="TextureRect" parent="LightPanel"]
+material = SubResource("ShaderMaterial_g10ll")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.739
+anchor_right = 0.7
+anchor_bottom = 0.913
+offset_top = 0.0240021
+offset_bottom = 0.00798035
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_rftc2")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="mouse_entered" from="MenuButton" to="MenuButton/TextureRect" method="_on_menu_button_mouse_entered"]
+[connection signal="mouse_exited" from="MenuButton" to="MenuButton/TextureRect" method="_on_menu_button_mouse_exited"]
+[connection signal="toggled" from="LightPanel/LightButton" to="LightPanel/LightButton" method="_on_toggled"]

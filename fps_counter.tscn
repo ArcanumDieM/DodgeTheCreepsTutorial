@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ptxhub4pgrw2"]
+
+[ext_resource type="Script" uid="uid://78v8mnnfof62" path="res://fps_counter.gd" id="1_4r2gn"]
+
+[node name="FPSCounter" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS: 0"
+script = ExtResource("1_4r2gn")
